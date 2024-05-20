@@ -18,16 +18,16 @@ This is the source code for the bulk of PearAI's functionality. Almost all the c
 
 1. Fork the repository and create your branch from main.
 1. Clone your fork.
-1. Install dependencies in repository root: `yarn`
+1. Install dependencies in repository root: `yarn install`
 1. Build the extension in repository root: `yarn build-all`
 
 The project uses [TypeScript][typescript], [Vitest][vitest] for the tests and [Prettier][prettier] for the formatting.
 
 ## Run the tests
 
-You can run tests with `pnpm test`
+You can run tests with `yarn test`
 
-To run them in watch mode, use: `pnpm test-watch`.
+To run them in watch mode, use: `yarn test-watch`.
 
 ## Run it locally
 
@@ -39,7 +39,7 @@ Standalone as an extension. This guide is for running it standalone.
 
 You can use [VS Code's built-in debugger][vscode-debug-extension] on the project to try out your local extension.
 
-To build the project, press `F5`. It should run the `run - app/vscode` task.
+To build the project, run `yarn build-extension` in the `extensions/pearai-extension` directory.
 
 You can also use: `command+shift+P` -> `Debug: Select and Start Runnning` -> `run - app/vscode`.
 
@@ -71,5 +71,5 @@ Once everything is ready, open a Pull-Request (if it's not already done) and ask
 
 ## Other Commands
 
-- **Lint**: `pnpm nx lint --skip-nx-cache`
-- **Package**: `pnpm nx run vscode:package`‍
+- **Lint**: `yarn nx lint --skip-nx-cache`
+- **Package**: `yarn nx run vscode:package`‍
