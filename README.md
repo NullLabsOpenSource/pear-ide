@@ -35,10 +35,14 @@ You can also:
 - `./scripts/code.sh`
 
 ### node-gyp Build Errors
+```bash
+err: error MSB8040: Spectre-mitigated libraries are required for this project.
+Install them from the Visual Studio installer (Individual components tab) for any toolsets and architectures being used. Learn more: https://aka.ms/Ofhn4c
+gyp ERR! build error
+```
 - Open Visual Studio Installer
 - Ensure you have the following selected
   - [x] Desktop development with C++
-  - [x] (IC) C++ v14.39 (17.9) MFC for v143 build tools with Spectre Mitigations (x86 & x64)
   - [x] (IC) MSVC v143 - VS 2022 C++ x64/x86 Spectre-mitigated libs (v14.39-17.9)
 
 *\*IC defined as "Individual comonents" tab.*
