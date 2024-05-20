@@ -34,3 +34,12 @@ You can also:
 - Remove the build and re-ran script `rm -rf out`
 - `./scripts/code.sh`
 
+### node-gyp Build Errors
+- Open Visual Studio Installer
+- Ensure you have the following selected
+  - [x] Desktop development with C++
+  - [x] (IC) C++ v14.39 (17.9) MFC for v143 build tools with Spectre Mitigations (x86 & x64)
+  - [x] (IC) MSVC v143 - VS 2022 C++ x64/x86 Spectre-mitigated libs (v14.39-17.9)
+
+*\*IC defined as "Individual comonents" tab.*
+*If having issue finding individual libraries add `spectre` to the search bar.*
