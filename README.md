@@ -1,6 +1,6 @@
 # Pear: The Best AI-Powered Code Editor
 
-Speed up your development with an editor integrated with AI. PearAI is forked from VSCode, and aims to reduce the time from ideation to conception for your product development by achieving the most seamless integration with AI. By developers, for developers.
+Supercharge your development with an editor designed for less coding, using AI. PearAI is forked from VSCode, and aims to reduce the time from ideation to conception for your product development by achieving the most seamless integration with AI.
 
 This repository serves as the primary application for PearAI, with most functionalities housed within the extension/pearai folder. We recommend focusing your work within this submodule by cloning it from https://github.com/trypear/pearai-app/.
 
