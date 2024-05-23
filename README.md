@@ -49,7 +49,7 @@ The following issue can occur after the build process.
 }
 ```
 To resolve this, follow the below steps:
- 1. Remove the build and re-ran script `rm -rf out`
+ 1. Remove the build `rm -rf out`
  2. Re-run the app: `./scripts/code.sh`
  3. If this persists please reach out via the communication channels listed in the [Contact](#contact) section
 
