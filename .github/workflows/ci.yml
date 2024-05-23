@@ -2,18 +2,6 @@ name: CI
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-      - release/*
-    paths-ignore:
-        - 'extensions/pearai-extension/**'
-  pull_request:
-    branches:
-      - main
-      - release/*
-    paths-ignore:
-      - 'extensions/pearai-extension/**'
 
 jobs:
   windows:
