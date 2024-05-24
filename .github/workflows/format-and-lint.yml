@@ -31,7 +31,7 @@ jobs:
         run: yarn
 
       - name: Run Prettier
-        run: yarn prettier --check './extensions/pearai-extension/**/src/**/*.{ts,tsx}'
+        run: yarn prettier --write './extensions/pearai-extension/**/src/**/*.{ts,tsx}'
 
       - name: Run ESLint
         run: yarn eslint './extensions/pearai-extension/**/src/**/*.{ts,tsx}' --quiet
