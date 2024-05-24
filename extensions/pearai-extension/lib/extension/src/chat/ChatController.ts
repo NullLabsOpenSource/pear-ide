@@ -130,7 +130,6 @@ export class ChatController {
 	async createConversation(conversationTypeId: string) {
 		console.log("creating new conversation");
 
-
 		try {
 			const conversationType = this.getConversationType(conversationTypeId);
 
@@ -169,13 +168,12 @@ export class ChatController {
 			if (vscode.window.activeTextEditor) {
 				const editor = vscode.window.activeTextEditor;
 
-				if (editor &&
+				if (
+					editor &&
 					editor.selection.end.isEqual(editor.selection.start) === false
 				) {
-					const selection = editor.selection
-					const text = editor.document.getText(
-						selection
-					).trim()
+					const selection = editor.selection;
+					const text = editor.document.getText(selection).trim();
 
 					console.log("selection: ", selection);
 
@@ -184,9 +182,9 @@ export class ChatController {
 						text: text,
 						startLine: selection.start.line,
 						endLine: selection.end.line,
-					}
+					};
 
-					result.conversation.addCodeContext(viewableContext)
+					result.conversation.addCodeContext(viewableContext);
 				}
 			}
 

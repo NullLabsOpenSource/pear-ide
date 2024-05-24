@@ -107,7 +107,7 @@ export class ChatPanel implements vscode.WebviewViewProvider {
 		}
 
 		if (conversations.length > 0) {
-			console.log('updated conv: ', conversations[conversations.length - 1]);
+			console.log("updated conv: ", conversations[conversations.length - 1]);
 		}
 
 		const surfacePromptForOpenAIPlus = getConfigSurfacePromptForOpenAIPlus();
