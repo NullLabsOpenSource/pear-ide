@@ -2,12 +2,19 @@
 
 # Base functionality
 function Base-Functionality {
-    echo -e "\nInitializing sub-modules..."
-    git submodule update --init --recursive
+	echo -e "\nInitializing sub-modules..."
+	git submodule update --init --recursive
 
-    cd ./extensions/pearai-submodule || exit
+	cd ./extensions/pearai-submodule || exit
 
-    ./scripts/install-dependencies.sh
+	./scripts/install-dependencies.sh
+
+	cd $currentDir
+
+	echo -e "\nSetting up root application..."
+	yarn install
+
+	./scripts/code.sh
 }
 
 # Setup all necessary paths for this script
@@ -17,10 +24,10 @@ link_path="$current_dir/extensions/pearai-extension"
 
 # Check if the symbolic link exists
 if [ ! -L "$link_path" ]; then
-    echo -e "\nCreating symbolic link 'extensions/pearai-submodule/extensions/vscode' -> 'extensions/pearai-extension'"
+	echo -e "\nCreating symbolic link 'extensions/pearai-submodule/extensions/vscode' -> 'extensions/pearai-extension'"
 
-    # Create the symbolic link
-    ln -s "$target_path" "$link_path"
+	# Create the symbolic link
+	ln -s "$target_path" "$link_path"
 fi
 
 # Run the base functionality
