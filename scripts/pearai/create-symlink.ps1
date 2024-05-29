@@ -1,5 +1,5 @@
 # Function to create the symbolic link
-function Create-Symlink {
+function Connect-Locations {
     param(
         [string]$targetPath,
         [string]$linkPath
@@ -14,4 +14,4 @@ $targetPath = $args[0]
 $linkPath = $args[1]
 
 # Call the function to create the symbolic link
-Create-Symlink -targetPath $targetPath -linkPath $linkPath
+Connect-Locations -targetPath $targetPath -linkPath $linkPath

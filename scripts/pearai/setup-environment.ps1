@@ -1,5 +1,5 @@
 # Base functionality
-function Base-Functionality {
+function Initialize-BaseFunctionality {
     Write-Host "`nInitializing sub-modules..." -ForegroundColor White
     git submodule update --init --recursive
 
@@ -28,4 +28,4 @@ if (-not (Test-Path $linkPath -PathType Any)) {
 }
 
 # Run the base functionality
-Base-Functionality
+Initialize-BaseFunctionality
