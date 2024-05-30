@@ -50,7 +50,7 @@ You'll need the following tools:
 
 The first time you clone the repo, please run:
 
-##### Mac
+##### macOS and Linux
 
 ```
  ./scripts/pearai/setup-environment.sh
@@ -58,14 +58,21 @@ The first time you clone the repo, please run:
 
 ##### Windows
 
-Open `Command Palette` and type `Run Task`. Then, select `setup-environment`.
-
+```bat
+.\scripts\pearai/setup-environment.ps1
+```
 ### Build
 
 Install and build all of the dependencies using `Yarn`:
 
+##### macOS and Linux
+
+```bash
+./scripts/pearai/build.sh
 ```
-cd vscode
+
+##### Windows
+```
 yarn
 ```
 
