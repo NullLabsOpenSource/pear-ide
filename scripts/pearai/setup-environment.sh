@@ -33,9 +33,9 @@ execute "cd ./extensions/pearai-submodule" "Failed to change directory to extens
 
 execute "git fetch origin" "Failed to fetch latest changes from origin"
 
-execute "git pull origin main" "Failed to pull latest changes from origin/main"
+execute "git pull origin rename" "Failed to pull latest changes from origin/rename"
 
-execute "git checkout main" "Failed to checkout main branch"
+execute "git checkout rename" "Failed to checkout rename branch"
 
 execute "./scripts/install-dependencies.sh" "Failed to install dependencies for the submodule"
 

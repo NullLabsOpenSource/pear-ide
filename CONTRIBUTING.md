@@ -66,7 +66,7 @@ You can also:
 .\scripts\pearai/setup-environment.ps1
 ```
 
-### Install dependencies
+### Install dependencies (If not first time running)
 
 ##### macOS and Linux
 
