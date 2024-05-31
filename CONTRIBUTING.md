@@ -1,8 +1,8 @@
 # Contributing to Pear AI
 
-This is the main app for PearAI. The bulk of the functionality is within `extension/pearai-extension`. Almost all the contributions should be in this subdirectory.
+This is the main app for PearAI. The bulk of the functionality is within `extension/pearai-submodule`. Almost all the contributions should be in this subdirectory.
 
-PearAI is a fork of VSCode, so simply follow VSCode's guide for running the app.
+PearAI is a fork of VSCode (and Continue), so simply follow VSCode's guide for running the app.
 
 The extension can be run in two ways:
 
@@ -48,7 +48,11 @@ You'll need the following tools:
 
 ## Build and Run
 
-The first time you clone the repo, please run:
+The first time you clone the repo, you can:
+
+In PearAI or VSCode, `Command Palette` and type `Run Task` then select `setup-environment`
+
+You can also:
 
 ##### macOS and Linux
 
@@ -61,17 +65,16 @@ The first time you clone the repo, please run:
 ```bat
 .\scripts\pearai/setup-environment.ps1
 ```
-### Build
 
-Install and build all of the dependencies using `Yarn`:
+### Install dependencies
 
 ##### macOS and Linux
 
 ```bash
-./scripts/pearai/build.sh
+./scripts/pearai/install-dependencies.sh
 ```
 
-##### Windows
+##### Windows (Todo)
 ```
 yarn
 ```
@@ -86,7 +89,7 @@ Running on Electron with extensions run in NodeJS:
 ./scripts/code.sh
 ```
 
-##### Windows
+##### Windows (Todo)
 
 ```bat
 .\scripts\code.bat
@@ -232,3 +235,25 @@ Please ensure your code adheres to the coding standards used throughout the proj
 ## Community
 
 Please be respectful and considerate of others. We're all here to learn and grow, so constructive, respectful communication is encouraged.
+
+
+## Known or Common Errors
+Below describes a set of known or common errors that can occur when developing with PearAI and the steps that can resolve such issues.
+
+#### No main.js found
+The following issue can occur after the build process.
+```
+[Error: ENOENT: no such file or directory, open '/pearai/out/vs/code/electron-main/main.js'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/code/pearai/out/vs/code/electron-main/main.js',
+  phase: 'loading',
+  moduleId: 'vs/code/electron-main/main',
+  neededBy: [ '===anonymous1===' ]
+}
+```
+To resolve this, follow the below steps:
+ 1. Remove the build `rm -rf out`
+ 2. Re-run the app: `./scripts/code.sh`
+ 3. If this persists please reach out via the communication channels listed in the [Contact](#contact) section
