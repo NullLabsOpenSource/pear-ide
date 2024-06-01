@@ -25,9 +25,9 @@ set ELECTRON_ENABLE_STACK_DUMPING=1
 
 :: Get Pear AI
 setlocal
-cd extensions/pearai-extension
-call yarn install
-call yarn build-all
+cd extensions/pearai-submodule
+powershell.exe -executionpolicy bypass -file .\scripts\install-dependencies.ps1
+powershell.exe -executionpolicy bypass -file .\scripts\build-extension.ps1
 endlocal
 
 :: Launch Code
