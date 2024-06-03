@@ -66,7 +66,6 @@ Thanks to these wonderful people who have contributed to this project:
 - [FryingPannnn](https://github.com/Fryingpannn)
 - [ItWasEnder](https://github.com/ItWasEnder)
 - [Gedeondoescode](https://github.com/gedeondoescode)
-- [Jwhitt3r](https://github.com/jwhitt3r)
 
 Feel free to join them and contribute!
 
