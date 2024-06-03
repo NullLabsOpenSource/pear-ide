@@ -1,8 +1,8 @@
 # Contributing to Pear AI
 
-This is the main app for PearAI. The bulk of the functionality is within `extension/pearai-extension`. Almost all the contributions should be in this subdirectory.
+This is the main app for PearAI. The bulk of the functionality is within `extension/pearai-submodule`. Almost all the contributions should be in this subdirectory.
 
-PearAI is a fork of VSCode, so simply follow VSCode's guide for running the app.
+PearAI is a fork of VSCode (and Continue), so simply follow VSCode's guide for running the app.
 
 The extension can be run in two ways:
 
@@ -29,8 +29,12 @@ You'll need the following tools:
       - if you install Node on your system using the Node installer from the [Node.JS](https://nodejs.org/en/download/) page then ensure that you have installed the 'Tools for Native Modules'. Everything should work out of the box then.
       - if you use a node version manager like [nvm](https://github.com/coreybutler/nvm-windows) or [nvs](https://github.com/jasongin/nvs) then follow these steps:
         - Install the current version of Python using the [Microsoft Store Package](https://docs.python.org/3/using/windows.html#the-microsoft-store-package).
-        - Install the Visual C++ Build Environment by either installing the [Visual Studio Build Tools](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=BuildTools) or the [Visual Studio Community Edition](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community). The minimum workload to install is 'Desktop Development with C++'.
-        - open a command prompt and run `npm config set msvs_version {visual studio version}`. (If you are using Visual Studio 2019 then you need to run `npm config set msvs_version 2019`)
+        - Install the Visual C++ Build Environment by either installing the [Visual Studio Build Tools](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=BuildTools) or the [Visual Studio Community Edition](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community) (note: you should only have one of these installed).
+        	- Make sure to then install the two options below (the MSVC option is in the "Individual Components" tab). e.g.:
+        ```
+         [1] Desktop development with C++
+         [2] MSVC v143 - VS 2022 C++ x64/x86 Spectre-mitigated libs (v14.39-17.9)
+        ```
     - **Warning:** Make sure your profile path only contains ASCII letters, e.g. *John*, otherwise, it can lead to [node-gyp usage problems (nodejs/node-gyp/issues#297)](https://github.com/nodejs/node-gyp/issues/297)
     - **Note**: Building and debugging via the Windows subsystem for Linux (WSL) is currently not supported.
   - **Windows WSL2**: https://github.com/microsoft/vscode/wiki/Selfhosting-on-Windows-WSL
@@ -48,7 +52,11 @@ You'll need the following tools:
 
 ## Build and Run
 
-The first time you clone the repo, please run:
+The first time you clone the repo, you can:
+
+In PearAI or VSCode, `Command Palette` and type `Run Task` then select `setup-environment`
+
+You can also:
 
 ##### macOS and Linux
 
@@ -61,14 +69,13 @@ The first time you clone the repo, please run:
 ```bat
 .\scripts\pearai/setup-environment.ps1
 ```
-### Build
 
-Install and build all of the dependencies using `Yarn`:
+### (If not first time running) Update dependencies 
 
 ##### macOS and Linux
 
 ```bash
-./scripts/pearai/build.sh
+./scripts/pearai/install-dependencies.sh
 ```
 
 ##### Windows
@@ -87,10 +94,13 @@ Running on Electron with extensions run in NodeJS:
 ```
 
 ##### Windows
-
-```bat
+- If first time installing, run
+```
 .\scripts\code.bat
 ```
+- On consecutive runs, we recommned downloading Git Bash, and running the same command as linux/mac to run the app (`./scripts/code.sh`), because it is faster.
+
+*Info: the reason is because the symlinking must be performed within the `code.bat` file on Windows on the first run. But on consecutive runs the symlink will already be created, so you can use the faster script which is `code.sh`
 
 👉 **Tip!** If you receive an error stating that the app is not a valid Electron app, it probably means you didn't run `yarn watch` first.
 
@@ -210,3 +220,24 @@ If you are using PearAI it will be:
 
 7. Double-click your overall PearAI app, and the extension should be built-in.
 8. Distribute application.
+
+## Known or Common Errors
+Below describes a set of known or common errors that can occur when developing with PearAI and the steps that can resolve such issues.
+
+#### No main.js found
+The following issue can occur after the build process.
+```
+[Error: ENOENT: no such file or directory, open '/pearai/out/vs/code/electron-main/main.js'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/code/pearai/out/vs/code/electron-main/main.js',
+  phase: 'loading',
+  moduleId: 'vs/code/electron-main/main',
+  neededBy: [ '===anonymous1===' ]
+}
+```
+To resolve this, follow the below steps:
+ 1. Remove the build `rm -rf out`
+ 2. Re-run the app: `./scripts/code.sh`
+ 3. If this persists please reach out via the communication channels listed in the [Contact](#contact) section
