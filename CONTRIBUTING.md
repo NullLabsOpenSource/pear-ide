@@ -2,6 +2,8 @@
 
 This is the main app for PearAI. The bulk of the functionality is within `extension/pearai-extension`. Almost all the contributions should be in this subdirectory.
 
+PearAI is a fork of VSCode, so simply follow VSCode's guide for running the app.
+
 The extension can be run in two ways:
 
 RECOMMENDED: Internally within the main PearAI application: https://github.com/trypear/pearai/. This guide is for running it internally.
@@ -168,7 +170,7 @@ Please be respectful and considerate of others. We're all here to learn and grow
 
 ## Packaging
 
-This section outlines how to package the app for a new release / distribution.
+This section outlines how to package the app for a new release / distribution. This process is a bit manual currently.
 
 PearAI can be packaged for the following platforms: `win32-ia32 | win32-x64 | darwin-x64 | darwin-arm64 | linux-ia32 | linux-x64 | linux-arm`
 
@@ -181,7 +183,30 @@ These `gulp` tasks are available:
 
 This will generate the new PearAI app and takes around 1 hour.
 
-pearai-submodule also needs to be packaged and integrated into the overall PearAI app.
+Then, `pearai-submodule` also needs to be packaged and integrated into the overall PearAI app.
 
+To do this, follow these steps. Some are manual.
 
+1. `cd` into `extensions/pearai-submodule/extensions/vscode`
+2. Run `npm run package'.
+3. This will create the `.vsix` extension within `extensions/pearai-submodule/extensions/vscode/build`
+4. Right-click the .vsix in VSCode or PearAI and select `Install vsix as Extension`. ![select](assets/pearai-install-vsix.png)
 
+5. This will install the extension as a compatible dist for your system:
+
+If you are using VSCode it will be:
+- Windows %USERPROFILE%\.vscode\extensions
+- macOS ~/.vscode/extensions
+- Linux ~/.vscode/extensions
+
+If you are using PearAI it will be:
+- Windows %USERPROFILE%\.pearai\extensions
+- macOS ~/.pearai/extensions
+- Linux ~/.pearai/extensions
+
+6. Copy the contents of the generated `extensions` folder into the `extensions/pearai` folder of the packaged PearAI App. For example, on MacOS, it is:
+
+`cp -r ~/.vscode/extensions/pearai.pearai-0.9.156 {path_to_PearAI.app}/Contents/Resources/app/extensions`
+
+7. Double-click your overall PearAI app, and the extension should be built-in.
+8. Distribute application.
