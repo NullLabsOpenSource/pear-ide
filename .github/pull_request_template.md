@@ -8,14 +8,9 @@ Please include a summary of the change and which issue is fixed. Make sure to li
 
 Fixes # (issue)
 
-## Important Notes
-Please do not edit the structure of the repo. Pear is constantly changing, and we want to make sure that we can easily integrate your changes into our codebase.
+## Additional Information
+
+If applicable, please include any screenshots or demos of the changes made. This helps us understand and review your contribution more effectively.
 
 You can also directly ping the maintainers or admins in the [Discord](https://discord.gg/7QMraJUsQt).
 
-## Checklist
-* [ ] I have signed the [Contributor License Agreement (CLA)](Contributor-License-Agreement)
-* [ ] I have created one pull request per issue
-* [ ] My pull request links to the relevant issue
-* [ ] I have followed the [Coding Guidelines](Coding-Guidelines)
-* [ ] My code changes are as small as possible
