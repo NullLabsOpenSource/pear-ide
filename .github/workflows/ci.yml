@@ -20,7 +20,7 @@ jobs:
 
       - uses: actions/setup-python@v5
         with:
-          python-version: "2"
+          python-version: "3.11.x"
 
       - name: Compute node modules cache key
         id: nodeModulesCacheKey
