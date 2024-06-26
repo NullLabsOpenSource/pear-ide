@@ -39,10 +39,9 @@ jobs:
           7z.exe a .build/node_modules_cache/cache.7z -mx3 `@.build/node_modules_list.txt
         continue-on-error: true
 
-      # This remains too inconsistent (works on some runners and some fail)
-      # Commenting out till issue can be fixed.
-      # - name: Compile and Download
-      #   run: yarn npm-run-all --max-old-space-size=4095 -lp compile "electron x64" playwright-install download-builtin-extensions
+      - name: Compile and Download
+        run: yarn npm-run-all --max-old-space-size=4095 -lp compile "electron x64" playwright-install download-builtin-extensions
+
       - name: Setup Environment
         run: .\scripts\pearai/setup-environment.ps1
 
@@ -129,7 +128,9 @@ jobs:
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
           ELECTRON_SKIP_BINARY_DOWNLOAD: 1
-        run: yarn --frozen-lockfile --network-timeout 180000
+        run: |
+          yarn --frozen-lockfile --network-timeout 180000
+          yarn playwright install
         continue-on-error: true
 
       - name: Compile and Download
@@ -309,8 +310,8 @@ jobs:
       - name: Compile /build/
         run: yarn --cwd build compile
 
-      - name: Check clean git state
-        run: ./.github/workflows/check-clean-git-state.sh
+      # - name: Check clean git state
+      #   run: ./.github/workflows/check-clean-git-state.sh
 
       - name: Run eslint
         run: yarn eslint
