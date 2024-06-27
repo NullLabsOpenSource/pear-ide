@@ -23,13 +23,16 @@ jobs:
         with:
           python-version: "3.x"
 
-      - name: Compute node modules cache key
-        id: nodeModulesCacheKey
-        run: echo "value=$(node build/azure-pipelines/common/computeNodeModulesCacheKey.js)" >> $GITHUB_OUTPUT
+      - name: Cache node modules
+        id: cache-node-modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
-      - name: Execute yarn
-        env:
-          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
+      - name: Install dependencies
         run: yarn install --frozen-lockfile --network-timeout 180000
 
       - name: Create node_modules archive
@@ -103,13 +106,11 @@ jobs:
           path: "**/node_modules"
           key: ${{ runner.os }}-cacheNodeModulesLinux-${{ steps.nodeModulesCacheKey.outputs.value }}
           restore-keys: ${{ runner.os }}-cacheNodeModulesLinux-
-        continue-on-error: true
 
       - name: Get yarn cache directory path
         id: yarnCacheDirPath
         if: ${{ steps.cacheNodeModules.outputs.cache-hit != 'true' }}
         run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
-        continue-on-error: true
 
       - name: Cache yarn directory
         if: ${{ steps.cacheNodeModules.outputs.cache-hit != 'true' }}
@@ -118,17 +119,14 @@ jobs:
           path: ${{ steps.yarnCacheDirPath.outputs.dir }}
           key: ${{ runner.os }}-yarnCacheDir-${{ steps.nodeModulesCacheKey.outputs.value }}
           restore-keys: ${{ runner.os }}-yarnCacheDir-
-        continue-on-error: true
 
       - name: Execute yarn
         if: ${{ steps.cacheNodeModules.outputs.cache-hit != 'true' }}
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
-          ELECTRON_SKIP_BINARY_DOWNLOAD: 1
         run: |
           yarn --frozen-lockfile --network-timeout 180000
           yarn playwright install
-        continue-on-error: true
 
       - name: Compile and Download
         run: ./scripts/pearai/setup-environment.sh
