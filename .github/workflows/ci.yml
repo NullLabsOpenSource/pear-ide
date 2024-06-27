@@ -21,7 +21,7 @@ jobs:
           node-version-file: .nvmrc
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: "3.x"
 
       - name: Compute node modules cache key
         id: nodeModulesCacheKey
@@ -47,17 +47,15 @@ jobs:
 
       # Runner is getting caught on this,
       # commenting out until resolved
-      # - name: Run Unit Tests (Electron)
-      #   run: .\scripts\test.bat
-      #   continue-on-error: true
+      - name: Run Unit Tests (Electron)
+        run: .\scripts\test.bat
+        continue-on-error: true
 
       - name: Run Unit Tests (node.js)
         run: yarn test-node
 
       - name: Run Unit Tests (Browser, Chromium)
-        run: |
-          yarn test-browser-no-install --browser chromium
-          yarn test-browser-no-install --browser browser
+        run: yarn test-browser-no-install --browser chromium
 
       - name: Run Integration Tests (Electron)
         run: .\scripts\test-integration.bat
