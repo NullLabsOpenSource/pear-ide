@@ -4,6 +4,13 @@ function Connect-Locations {
         [string]$targetPath,
         [string]$linkPath
     )
+	    # Check if the symbolic link already exists and remove it if it does
+    if (Test-Path $linkPath -PathType SymbolicLink) {
+        Write-Host "Removing existing symbolic link at '$linkPath'..."
+        Remove-Item $linkPath
+    }
+	
+	Start-Sleep 1
 
     Write-Host "Creating symbolic link '$targetPath' -> '$linkPath'"
     New-Item -ItemType SymbolicLink -Path $linkPath -Target $targetPath
