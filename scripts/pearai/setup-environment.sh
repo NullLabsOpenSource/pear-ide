@@ -12,18 +12,31 @@ execute() {
 	fi
 }
 
+# Check if the current OS is Windows
+if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "win32" ]]; then
+    echo "Setup | This script is intended for Mac/Linux and cannot be run on Windows."
+    exit 1
+fi
+
 # Setup all necessary paths for this script
 app_dir=$(pwd)
 target_path="$app_dir/extensions/pearai-submodule/extensions/vscode"
 link_path="$app_dir/extensions/pearai-ref"
 
-# Check if the symbolic link exists
-if [ ! -L "$link_path" ]; then
-	# Print message about creating a symbolic link from link_path to target_path
-	echo -e "\nCreating symbolic link '$link_path' -> '$target_path'"
-	# Create the symbolic link
-	ln -s "$target_path" "$link_path"
+# Check if the symbolic link exists and remove it if it does
+if [ -e "$link_path" ]; then
+    if [ -L "$link_path" ]; then
+        echo -e "\nRemoving existing symbolic link at '$link_path' before creating a new one."
+        rm "$link_path"
+    else
+        echo -e "\n'$link_path' already exists and is not a symbolic link. Removing it."
+        rm -rf "$link_path"
+    fi
 fi
+
+# Create new symbolic link
+echo -e "\nCreating symbolic link '$link_path' -> '$target_path'"
+ln -s "$target_path" "$link_path"
 
 # Run the base functionality
 echo -e "\nInitializing sub-modules..."
