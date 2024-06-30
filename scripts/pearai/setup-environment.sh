@@ -1,5 +1,32 @@
 #!/bin/bash
 
+# Function to check the operating system
+check_os() {
+  case "$(uname -s)" in
+    Linux*)     os="Linux";;
+    Darwin*)    os="Mac";;
+    CYGWIN*|MINGW32*|MSYS*|MINGW*) os="Windows";;
+    *)          os="Unknown";;
+  esac
+}
+
+check_os
+printf "\n\nDetected operating system: $os\n\n"
+
+# If the OS is Windows, give warning and prompt user to continue
+if [ "$os" == "Windows" ]; then
+  echo "This script is for unix systems (mac, linux)"
+	echo -e "Symbolic links might not work properly on Windows, please run windows scripts"
+	read -n 1 -s -r -p "Press any key to exit or enter to continue..."
+
+	# Check the user's input
+  if [ "$REPLY" != "" ]; then
+    echo -e "\n\e[91mExiting...\e[0m"
+    exit
+  fi
+fi
+
+
 # Function to execute a command and check its status
 execute() {
 	local cmd=$1
